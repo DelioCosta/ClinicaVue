@@ -22,7 +22,7 @@ class MedicoController extends Controller
      */
     public function create()
     {
-        return view('medicos.create');
+        return Inertia::render('Medicos/Create');
     }
 
     /**
@@ -34,7 +34,7 @@ class MedicoController extends Controller
 
         Medico::create($request->all());
 
-        return redirect()->route('medicos.index')->with('success','Médico cadastrado com sucesso');
+        return redirect('medicos');
 
     }
 
@@ -51,7 +51,7 @@ class MedicoController extends Controller
      */
     public function edit(Medico $medico)
     {
-        return view('medicos.create', compact('medico'));
+        return Inertia::render('Medicos/Create', compact('medico'));
     }
 
     /**
@@ -63,7 +63,7 @@ class MedicoController extends Controller
 
         $medico->update($request->all());
 
-        return redirect()->route('medicos.index')->with('success','Médico alterado com sucesso');
+        return redirect('medicos');
     }
 
     /**

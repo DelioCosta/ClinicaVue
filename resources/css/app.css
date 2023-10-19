@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+input:required:invalid{
+ background-color: rgb(255, 170, 210);
+ border-color: rgb(255, 53, 164);
+}

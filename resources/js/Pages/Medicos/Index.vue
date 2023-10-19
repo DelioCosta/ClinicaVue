@@ -41,6 +41,10 @@ const deleteMedico = (id, nome) =>{
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                    <div class="my-4 flex justify-end">
+                        <Link :href="route('medicos.create')" :class="'px-4 py-2 bg-green-500 rounded-md font-semibold mr-1 text-white border'">
+                            <i class="fa-solid fa-plus"></i>Acidionar</Link>
+                    </div>
                     <table class="table-auto border w-full border-gray-400">
                         <thead class="bg-gray-100">
                             <th class="px-4 py-4">ID</th>
