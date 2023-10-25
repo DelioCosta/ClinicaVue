@@ -6,8 +6,10 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import axios from 'axios';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+axios.defaults.baseURL = 'http://localhost:8000/api/';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

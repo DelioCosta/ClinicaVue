@@ -5,6 +5,10 @@ import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import axios from 'axios';
+import {useToast} from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+
 
 const props = defineProps({
     medico: {type: Object}
@@ -15,6 +19,26 @@ const form = useForm({
     nome: props.medico ? props.medico.nome : '',
     crm: props.medico ? props.medico.crm : ''
 });
+
+const $toast = useToast({
+    position: 'top-right',
+    duration : 2000,
+    dismissible: true
+});
+
+const update = () => {
+    if(props.medico){ //se está editando um médico
+        axios.put('medicos/' + props.medico.id, form)
+        .then((res) => {
+            console.log(res);
+            $toast.success('Médico atualizado com sucesso!');
+        })
+        .catch((error) => {
+            console.log('Error: ' + error.res.data);
+            $toast.error('Erro ao atualizar!');
+        })
+    }
+}
 
 </script>
 
@@ -34,11 +58,11 @@ const form = useForm({
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg" >
                         <div class="mb-4 w-96">
                             <InputLabel for="nome" value="Nome"></InputLabel>
-                            <TextInput id="nome" v-model="form.nome" type="text" required ></TextInput>
+                            <TextInput id="nome" v-model="form.nome" type="text" required @blur="update"></TextInput>
                         </div>
                         <div class="mb-4">
                             <InputLabel for="crm" value="CRM"></InputLabel>
-                            <TextInput id="crm" v-model="form.crm" type="text" required ></TextInput>
+                            <TextInput id="crm" v-model="form.crm" type="text" required @blur="update"></TextInput>
                         </div>
                         <div class="my-4" :disabled="form.processing">
                             <PrimaryButton>Salvar</PrimaryButton>
