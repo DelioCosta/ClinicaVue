@@ -25,7 +25,7 @@ class Medico extends Model
         'crm' => 'filled|numeric'
     ];
 
-    // public function consultas(): HasMany {
-    //     return $this->hasMany(Consulta::class);
-    // }
+    public function consultas(): HasMany {
+        return $this->hasMany(Consulta::class);
+    }
 }

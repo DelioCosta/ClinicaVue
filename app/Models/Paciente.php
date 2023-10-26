@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Paciente extends Model
 {
@@ -26,7 +27,7 @@ class Paciente extends Model
         'foto' => 'mimes:jpg,png'
     ];
 
-    // public function consultas(): HasMany {
-    //     return $this->hasMany(Consulta::class);
-    // }
+    public function consultas(): HasMany {
+        return $this->hasMany(Consulta::class);
+    }
 }

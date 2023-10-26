@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\MedicoController;
 use App\Http\Controllers\Api\PacienteController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ConsultaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,4 @@ use Illuminate\Support\Facades\Route;
 Route::resource('medicos', MedicoController::class);
 Route::resource('pacientes', PacienteController::class);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('consultas/check', [ConsultaController::class, 'getOne']);

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-input:required:invalid{
+/* input:required:invalid{
  background-color: rgb(255, 170, 210);
  border-color: rgb(255, 53, 164);
-}
+} */
