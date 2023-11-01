@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::resource('medicos', MedicoController::class);
+Route::resource('medicos', MedicoController::class)->middleware(['auth:sanctum', 'ability:can-all']);
 Route::resource('pacientes', PacienteController::class);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('consultas/check', [ConsultaController::class, 'getOne']);
+Route::get('consultas/check', [ConsultaController::class, 'getOne'])->middleware(['auth:sanctum', 'ability:can-all']);
