@@ -25,4 +25,5 @@ use Illuminate\Support\Facades\Route;
 Route::resource('medicos', MedicoController::class)->middleware(['auth:sanctum', 'ability:can-all']);
 Route::resource('pacientes', PacienteController::class);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('consultas/check', [ConsultaController::class, 'getOne'])->middleware(['auth:sanctum', 'ability:can-all']);
+// Route::get('consultas/check', [ConsultaController::class, 'getOne'])->middleware(['auth:sanctum', 'ability:can-all']);
+Route::get('consultas/check', [ConsultaController::class, 'getOne']);

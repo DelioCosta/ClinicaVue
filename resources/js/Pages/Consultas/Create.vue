@@ -10,6 +10,8 @@ import axios from 'axios';
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { ref } from 'vue';
+import db from '@/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 const props = defineProps({
     consulta: {type: Object},
@@ -35,8 +37,22 @@ const $toast = useToast({
 
 const block = ref(false);
 
-const check = () => {
+const gravar = async () => {
+    const colRef = collection(db,'consultas');
 
+    const consulta = {
+        "medico": form.medico_id,
+        "data": form.dt,
+        "hora": form.hora_inicio,
+        "pacietne": form.paciente_id
+    }
+
+    const docRef = await addDoc(colRef,consulta);
+
+    form.post(route('consultas.store'));
+}
+
+const check = () => {
     if(!form.medico_id || !form.dt || !form.hora_inicio){
         return false;
     }
@@ -72,7 +88,7 @@ const check = () => {
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <form @submit.prevent="$event=> props.consulta ? form.put(route('consultas.update',props.consulta)) : form.post(route('consultas.store'))">
+                <form @submit.prevent="$event => props.consulta ? form.put(route('consultas.update',props.consulta)) : gravar() ">
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg flex flex-wrap gap-4" >
                         <div class="mb-4">
                             <InputLabel for="paciente_id" value="Paciente"></InputLabel>
